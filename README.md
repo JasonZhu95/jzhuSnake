@@ -4,6 +4,12 @@ Basic recreation of the Snake using OpenGL and C++.  Using knowledge gained from
 # How it Looks:
 ![](https://media1.giphy.com/media/G1zd0SPfnor9AGnCDn/giphy.gif?cid=790b7611b2c9608af2951abb15c11e7e2fac810e0b96ea3c&rid=giphy.gif&ct=g)
 
+# Features
+* Texture and Shader Rendering
+* Increased Snake Speed Over Time
+* Score
+* Pause
+* Game Over
 # Prerequisites
 * OpenGl
 * C++
