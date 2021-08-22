@@ -10,6 +10,7 @@ Basic recreation of the Snake using OpenGL and C++.  Using knowledge gained from
 * Score
 * Pause
 * Game Over
+* Restart Option
 # Prerequisites
 * OpenGl
 * C++
