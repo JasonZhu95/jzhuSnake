@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 {
 	glfwInit();
 
-	// Using OpenGL at least version 3.3 core
+	// Using OpenGL 3.3 core
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 
 	glfwSetWindowIconifyCallback(window, glfw_window_iconify_callback);
 
-	// No v-sync.
+	// No Vsync
 	glfwSwapInterval(0);
 
 	// Initialize Snake Game
