@@ -22,5 +22,5 @@ Basic recreation of the Snake using OpenGL and C++.  Using knowledge gained from
 * [glText](https://github.com/vallentin/glText)
 
 # Acknowledgements
-https://learnopengl.com/ a great resource for learning OpenGl
-Background Music taken from https://www.youtube.com/watch?v=2RKnfOAI1A0
+* https://learnopengl.com/ a great resource for learning OpenGl
+* Background Music taken from https://www.youtube.com/watch?v=2RKnfOAI1A0
