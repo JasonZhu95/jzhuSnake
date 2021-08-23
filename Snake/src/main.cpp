@@ -62,12 +62,12 @@ int main(int argc, char* argv[])
 	// deltaTime variables
 	float deltaTime = 0.0f;
 	float lastFrame = 0.0f;
-	float maxFrameTime = 1.0f / 60.0;
+	float maxFrameTime = static_cast<float>(1.0f / 60.0);
 
 	while (!glfwWindowShouldClose(window))
 	{
 		// calculate delta time
-		float currentFrame = glfwGetTime();
+		float currentFrame = (float)glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
@@ -88,7 +88,7 @@ int main(int argc, char* argv[])
 
 		glfwSwapBuffers(window);
 		double time_elapsed_for_frame = glfwGetTime() - currentFrame;
-
+		// Sleep Cycle
 		if (time_elapsed_for_frame < maxFrameTime)
 		{
 			double ms = (maxFrameTime - time_elapsed_for_frame) * 1000.0;

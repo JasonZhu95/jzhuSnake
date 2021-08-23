@@ -34,18 +34,20 @@ void Game::init(int width, int height, int tileCount)
 
 	// Initialize Rendering
 	renderer = new Renderer();
-	renderer->initRenderData(width, height, quadShader);
+	renderer->initRenderData((float)width, (float)height, quadShader);
 	
-	// Set values
+	// Set Member values
 	this->width = width;
 	this->height = height;
 	this->resolution = static_cast<float>(height) / width;
 	this->tileX = tileCount;
-	this->tileY = this->tileX * resolution;
+	this->tileY = int(this->tileX * resolution);
 	cellWidth = (static_cast<float>(width) / this->tileX);
 	cellHeight = (static_cast<float>(height) / this->tileY);
 	currentDirection = Direction::UP;
 	oldDirection = currentDirection;
+	gamePaused = false;
+	gameOver = false;
 
 	// Initialize Snake head
 	snakeCurrentCell = { 8, 3 };
@@ -80,10 +82,6 @@ void Game::init(int width, int height, int tileCount)
 	food = new GameObject({ 2, 2 }, { cellWidth * 0.7f, cellHeight * 0.7f }, { 1.0f, 0.0f, 0.0f, 1.0f }, tileTexture);
 	food->cell = emptyCells[rand() % emptyCells.size()];
 	food->position = glm::vec2(food->cell.x * cellWidth - cellWidth * 0.5f, food->cell.y * cellHeight - cellHeight * 0.5f);
-
-	// Initialize Member variables;
-	gamePaused = false;
-	gameOver = false;
 
 	spawnObstacle();
 
@@ -134,7 +132,7 @@ void Game::update(float dt)
 {
 	// Text Animation
 	static float tempdt = dt;		//2x faster than current delta time for the animation
-	tempdt += dt * 2.5;
+	tempdt += dt * (float)2.5;
 	animationDt = abs(sin(tempdt)) - 0.5f;
 
 	if (!gamePaused && !gameOver)
@@ -168,7 +166,7 @@ void Game::update(float dt)
 			emptyCells.push_back(lastTailCell);
 
 			// Move snake
-			for (int i = snake.size() - 1; i > 0; i--)
+			for (int i = (int)snake.size() - 1; i > 0; i--)
 			{
 				snake[i].cell = snake[i - 1].cell;
 				snake[i].position = snake[i - 1].position;
@@ -220,7 +218,7 @@ void Game::update(float dt)
 
 			SoundEngine->play2D("assets/audio/eat.wav", false);
 			// Increase Score
-			score += 10;
+			score += 1000;
 
 			// Increase Speed
 			snakeSpeed += 0.3f;
@@ -265,7 +263,7 @@ void Game::update(float dt)
 		gamePaused = true;
 
 	// Clear key each frame
-	for (auto& i : supportedKeys)
+	for (auto& i : keysProcessed)
 		Keys[i] = false;
 }
 
@@ -281,7 +279,7 @@ void Game::render()
 	renderer->drawQuad(gridTexture, { this->width * 0.5f, this->height * 0.5f }, { this->width, this->height }, glm::vec4(0.25f, 0.25f, 0.25f, 1.0f));
 
 	// Draw snake and head
-	for (int i = snake.size() - 1; i >= 0; i--)
+	for (int i = (int)snake.size() - 1; i >= 0; i--)
 	{
 		float percent = static_cast<float>(i) / static_cast<float>(snake.size());
 		glm::vec3 bodyColor = glm::mix(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 0.0f), percent);
@@ -291,7 +289,6 @@ void Game::render()
 
 	// Draw Food
 	food->drawObject(*renderer);
-
 	// Draw obstacle
 	for (unsigned int i = 0; i < obstacles.size(); i++)
 		obstacles[i].drawObject(*renderer);
@@ -346,7 +343,6 @@ void Game::spawnObstacle()
 	removeCells(eCell);
 }
 
-// TODO: Redundant code will fix after
 void Game::restart()
 {
 	// Clear data
@@ -354,8 +350,13 @@ void Game::restart()
 	emptyCells.clear();
 	obstacles.clear();
 
+	// Initialize Member variables;
 	currentDirection = Direction::UP;
 	oldDirection = currentDirection;
+	gamePaused = false;
+	gameOver = false;
+	score = 0;
+	snakeSpeed = 8.0f;
 
 	// Initialize Snake head
 	snakeCurrentCell = { 8, 3 };
@@ -395,12 +396,6 @@ void Game::restart()
 	food->cell = emptyCells[rand() % emptyCells.size()];
 	food->position = glm::vec2(food->cell.x * cellWidth - cellWidth * 0.5f, food->cell.y * cellHeight - cellHeight * 0.5f);
 
-	// Initialize Member variables;
-	gamePaused = false;
-	gameOver = false;
-
-	score = 0;
-	snakeSpeed = 8.0f;
 }
 
 void Game::updateDimensions(int width, int height)

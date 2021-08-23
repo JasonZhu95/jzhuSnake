@@ -57,6 +57,7 @@ private:
 	std::vector<GameObject> snake;
 	std::vector<GameObject> obstacles;
 
+	int keysProcessed[10] = { KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_W, KEY_S, KEY_A, KEY_D, KEY_P, KEY_R };
 	int width;
 	int height;
 	int tileX;
@@ -73,5 +74,4 @@ private:
 	bool gamePaused;
 	bool gameOver;
 
-	int supportedKeys[10] = { KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_W, KEY_S, KEY_A, KEY_D, KEY_P, KEY_R };
 };
