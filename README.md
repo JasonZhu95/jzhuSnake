@@ -2,7 +2,7 @@
 Basic recreation of the Snake using OpenGL and C++.  Using knowledge gained from the textbook Learn OpenGL - Graphics Programming and trying to practically apply it in this 2d rendering of Snake.
 
 # How it Looks:
-![](https://media1.giphy.com/media/G1zd0SPfnor9AGnCDn/giphy.gif?cid=790b7611b2c9608af2951abb15c11e7e2fac810e0b96ea3c&rid=giphy.gif&ct=g)
+![](https://media2.giphy.com/media/MsQOSUc0Jxig4GP6mT/giphy.gif?cid=790b761187c27739b08d879900cc02e072765c5a6f3cca03&rid=giphy.gif&ct=g)
 
 # Features
 * Texture and Shader Rendering
